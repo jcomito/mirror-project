@@ -1,0 +1,24 @@
+var config = {};
+
+module.exports = {
+  init: function (conf) {
+    "use strict";
+    config = conf;
+
+    // check if quote module is in the config
+    if (!config.QUOTES) {
+      console.log("QUOTES config key missing, skipping module");
+      return false;
+    }
+  },
+  routes: function (app) {
+    "use strict";
+    app.get('/quotes', function (req, res) {
+      res.send(config.QUOTES)
+    });
+
+    return app;
+  },
+  scripts: ["quote/quote.js"],
+  directives: ["inspirational-quote"]
+};
